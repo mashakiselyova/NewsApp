@@ -26,7 +26,6 @@ namespace NewsApp.Controllers
             return View(model);
         }
 
-
         [HttpPost]
         public IActionResult Create(Article article, int categoryId)
         {

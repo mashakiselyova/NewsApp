@@ -1,0 +1,18 @@
+﻿@using System.Collections.Generic
+@using NewsApp.Models
+@model List<Article>
+
+<h1>Новости</h1>
+<br />
+
+
+@foreach (Article article in Model)
+{
+    <div>
+        <div><h3><a asp-action="ShowArticle" asp-route-id="@article.Id">@article.Title</a></h3></div>
+        <div>@article.Author</div>
+        <div>@article.Date</div>
+        <div>@article?.Category?.Name</div>
+        <p>@article.Preview</p>
+    </div>
+}

@@ -1,0 +1,11 @@
+﻿@model NewsApp.Models.Article
+
+
+<div>
+    <h1>@Model.Title</h1><br />
+    <div>@Model.Author</div>
+    <div>@Model.Date</div>
+    <div>@Model?.Category?.Name</div>
+    <div>@Model.Text</div>
+</div>
+

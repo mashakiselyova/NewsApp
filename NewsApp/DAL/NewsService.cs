@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NewsApp.Models;
 
 namespace NewsApp.DAL
@@ -18,22 +19,24 @@ namespace NewsApp.DAL
         public void CreateArticle(Article article)
         {
             article.Date = DateTime.Now;
+            article.SetPreview();
             _context.Articles.Add(article);
             _context.SaveChanges();
         }
 
         public Article GetArticle(int id)
         {
-            return _context.Articles.Find(id);
+            return _context.Articles.Include(a => a.Category).ToList().Find(a => a.Id == id);
         }
 
         public List<Article> GetArticles()
         {
-            return _context.Articles.ToList();
+            return _context.Articles.Include(a => a.Category).ToList();
         }
 
         public void EditArticle(Article article)
         {
+            article.SetPreview();
             _context.Articles.Update(article);
             _context.SaveChanges();
         }

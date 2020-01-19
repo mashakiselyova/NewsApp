@@ -11,7 +11,7 @@ namespace NewsApp.Models
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -21,8 +21,9 @@ namespace NewsApp.Models
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = "0",
-                Name = "admin"
+                Name = "admin",
+                NormalizedName="ADMIN"
             });
-        }
+        }        
     }
 }
