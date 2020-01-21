@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using NewsApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using NewsApp.Models;
 
 namespace NewsApp.DAL
 {
@@ -46,28 +45,6 @@ namespace NewsApp.DAL
             Article temp = _context.Articles.Find(id);
             _context.Articles.Remove(temp);
             _context.SaveChanges();
-        }
-
-        public List<Category> GetCategories()
-        {
-            return _context.Categories.ToList();
-        }
-
-        public void CreateCategory(Category category)
-        {
-            _context.Categories.Add(category);
-            _context.SaveChanges();
-        }
-
-        public void DeleteCategory(int id)
-        {
-            _context.Categories.Remove(_context.Categories.Find(id));
-            _context.SaveChanges();
-        }
-
-        public Category GetCategory(int id)
-        {
-            return _context.Categories.Find(id);
-        }
+        }        
     }
 }

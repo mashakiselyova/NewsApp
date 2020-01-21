@@ -1,18 +1,33 @@
-﻿@using System.Collections.Generic
-@using NewsApp.Models
-@model List<Article>
+﻿@model NewsApp.ViewModels.NewsViewModel
 
 <h1>Новости</h1>
 <br />
 
-
-@foreach (Article article in Model)
+@foreach (Article article in Model.Articles)
 {
     <div>
         <div><h3><a asp-action="ShowArticle" asp-route-id="@article.Id">@article.Title</a></h3></div>
         <div>@article.Author</div>
         <div>@article.Date</div>
-        <div>@article?.Category?.Name</div>
+        <div>@article.Category?.Name</div>
         <p>@article.Preview</p>
     </div>
 }
+
+<nav>
+    <ul class="pagination">
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a asp-action="Index" asp-route-page="@(Model.PageViewModel.PageNumber - 1)" class="page-link">Предыдущая</a>
+            </li>
+
+        }
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <li class="page-item">
+                <a asp-action="Index" asp-route-page="@(Model.PageViewModel.PageNumber + 1)" class="page-link">Следующая</a>
+            </li>
+        }
+    </ul>
+</nav>

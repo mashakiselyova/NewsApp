@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NewsApp.Models;
+using NewsApp.DAL;
 using System.Linq;
 
 namespace NewsApp.Components
 {
     public class LastNews : ViewComponent
     {
-        private ApplicationContext _context;
+        private NewsService _service;
 
-        public LastNews(ApplicationContext context)
+        public LastNews(NewsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public IViewComponentResult Invoke()
         {
-            return View(_context.Articles.Include(a => a.Category).OrderByDescending(a => a.Date).Take(3).ToList());
+            return View(_service.GetArticles().OrderByDescending(a => a.Date).Take(3).ToList());
         }
     }
 }
