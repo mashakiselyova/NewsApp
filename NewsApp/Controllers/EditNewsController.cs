@@ -9,46 +9,47 @@ namespace NewsApp.Controllers
     [Authorize(Roles = "admin")]
     public class EditNewsController : Controller
     {
-        private NewsService _service;
+        private NewsService _newsService;
+        private CategoryService _categoryService;
 
-        public EditNewsController(NewsService service)
+        public EditNewsController(NewsService service, CategoryService categoryService)
         {
-            _service = service;
+            _newsService = service;
+            _categoryService = categoryService;
         }
 
-        public IActionResult Index() => View(_service.GetArticles());
+        public IActionResult Index() => View(_newsService.GetArticles());
 
         [HttpGet]
         public IActionResult Create()
         {
             EditNewsViewModel model = new EditNewsViewModel();
-            model.Categories = _service.GetCategories();
+            model.Categories = _categoryService.GetCategories();
             return View(model);
         }
-
 
         [HttpPost]
         public IActionResult Create(Article article, int categoryId)
         {
             if (categoryId != 0) 
-                article.Category = _service.GetCategory(categoryId);
-            _service.CreateArticle(article);
+                article.Category = _categoryService.GetCategory(categoryId);
+            _newsService.CreateArticle(article);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            _service.DeleteArticle(id);
+            _newsService.DeleteArticle(id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Article article = _service.GetArticle(id);
+            Article article = _newsService.GetArticle(id);
             EditNewsViewModel model = new EditNewsViewModel();
-            model.Categories = _service.GetCategories();
+            model.Categories = _categoryService.GetCategories();
             model.Title = article.Title;
             model.Author = article.Author;
             model.Category = article.Category;
@@ -60,8 +61,8 @@ namespace NewsApp.Controllers
         public IActionResult Edit(Article article, int categoryId)
         {
             if (categoryId != 0)
-                article.Category = _service.GetCategory(categoryId);
-            _service.EditArticle(article);
+                article.Category = _categoryService.GetCategory(categoryId);
+            _newsService.EditArticle(article);
             return RedirectToAction("Index");
         }
     }

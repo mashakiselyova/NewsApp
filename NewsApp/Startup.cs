@@ -28,6 +28,7 @@ namespace NewsApp
                 .AddEntityFrameworkStores<ApplicationContext>();
 
             services.AddTransient<NewsService>();
+            services.AddTransient<CategoryService>();
 
             services.AddControllersWithViews();
         }

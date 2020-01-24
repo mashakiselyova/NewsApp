@@ -1,6 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная";
 }
 
-<h1>Главная</h1>
+<div>
+    @await Component.InvokeAsync("LastNews")
+</div>
 

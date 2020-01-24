@@ -7,9 +7,9 @@ namespace NewsApp.Controllers
 {
     public class CategoriesController : Controller
     {
-        private NewsService _service;
+        private CategoryService _service;
 
-        public CategoriesController(NewsService service)
+        public CategoriesController(CategoryService service)
         {
             _service = service;
         }

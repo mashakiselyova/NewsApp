@@ -19,6 +19,9 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="News", asp-action="Index">Новости</a>
+                        </li>
                         @if (User.IsInRole("admin"))
                         {
                             <li class="nav-item">
@@ -41,9 +44,16 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        <div class="row">
+            <div class="col-9">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+            <div class="col-3">
+                @await Component.InvokeAsync("Categories")
+            </div>
+        </div>        
     </div>
 
     <footer class="border-top footer text-muted">

@@ -1,0 +1,17 @@
+﻿@using System.Collections.Generic
+@using NewsApp.Models
+@model List<Category>
+
+<nav class="nav-item">
+    <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Категории
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @foreach(Category category in Model)
+            {
+                <a class="dropdown-item" asp-controller="News" asp-action="NewsByCategory" asp-route-categoryId="@category.Id">@category.Name</a>
+            }
+        </div>
+    </div>
+</nav>
